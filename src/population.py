@@ -28,7 +28,7 @@ def __permuted_integer_subject(size, bounds):
 	random.shuffle(subject)
 	return subject
 
-def __real_subject(size, bounds):
+def __float_subject(size, bounds):
 	subject = []
 	realBounds = (bounds[0]*100, bounds[1]*100)
 	for _ in range(size):
@@ -43,5 +43,5 @@ condifications = {
 	'BIN' : __binary_subject,
 	'INT' : __integer_subject,
 	'INT-PERM' : __permuted_integer_subject,
-	'REAL' : __real_subject
+	'FLOAT' : __float_subject
 }
