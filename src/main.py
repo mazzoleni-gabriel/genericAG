@@ -1,4 +1,4 @@
-import initPopulation as pop
+import population
 
 #PARAMETERS
 BOUNDS = (-5, 10)
@@ -6,8 +6,8 @@ COD = 'REAL'
 POPULATION_SIZE = 10
 CROMOSSOME_SIZE = 5
 
-print(pop.init_population(POPULATION_SIZE, CROMOSSOME_SIZE, 'BIN', BOUNDS))
-print(pop.init_population(POPULATION_SIZE, CROMOSSOME_SIZE, 'INT', BOUNDS))
-print(pop.init_population(POPULATION_SIZE, CROMOSSOME_SIZE, 'INT-PERM', BOUNDS))
-print(pop.init_population(POPULATION_SIZE, CROMOSSOME_SIZE, 'REAL', BOUNDS))
+print(population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'BIN', BOUNDS))
+print(population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'INT', BOUNDS))
+print(population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'INT-PERM', BOUNDS))
+print(population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'REAL', BOUNDS))
 

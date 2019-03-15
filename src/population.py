@@ -1,22 +1,15 @@
 import random
 
-def init_population(populationSize, chromosomeSize, codification, bounds):
+def init(populationSize, chromosomeSize, codification, bounds):
 	population = []
 	for _ in range(populationSize):
 		population.append(__init_subject(chromosomeSize, codification, bounds))
 	return population
 
 def __init_subject(chromosomeSize, codification, bounds):
-	if codification == 'BIN':
-		return __binary_subject(chromosomeSize)
-	if codification == 'INT':
-		return __integer_subject(chromosomeSize, bounds)
-	if codification == 'INT-PERM':
-		return __permuted_integer_subject(chromosomeSize)
-	if codification == 'REAL':
-		return __real_subject(chromosomeSize, bounds)
+	return condifications[codification](chromosomeSize, bounds)
 
-def __binary_subject(size):
+def __binary_subject(size, bounds):
     subject = []
     for _ in range(size):
             subject.append(__random_number((0,1)))
@@ -28,7 +21,7 @@ def __integer_subject(size, bounds):
 		subject.append(__random_number(bounds))
 	return subject
 
-def __permuted_integer_subject(size):
+def __permuted_integer_subject(size, bounds):
 	subject = []
 	for i in range(size):
 		subject.append(i)
@@ -42,6 +35,13 @@ def __real_subject(size, bounds):
 		subject.append(__random_number(realBounds)/100)
 	return subject
 
-# ! this function should be in a dedicated file
+# ! this function should be in a dedicated file with all random gerenators
 def __random_number(bounds):
 	return random.randrange(bounds[0], bounds[1]+1)
+
+condifications = {
+	'BIN' : __binary_subject,
+	'INT' : __integer_subject,
+	'INT-PERM' : __permuted_integer_subject,
+	'REAL' : __real_subject
+}
