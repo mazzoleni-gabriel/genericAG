@@ -1,46 +1,47 @@
 import random
 
-def initPopulation(populationSize, chromosomeSize, codification, bounds):
+def init_population(populationSize, chromosomeSize, codification, bounds):
 	population = []
 	for _ in range(populationSize):
-		population.append(initSubject(chromosomeSize, codification, bounds))
+		population.append(__init_subject(chromosomeSize, codification, bounds))
 	return population
 
-def initSubject(chromosomeSize, codification, bounds):
+def __init_subject(chromosomeSize, codification, bounds):
 	if codification == 'BIN':
-		return binarySubject(chromosomeSize)
+		return __binary_subject(chromosomeSize)
 	if codification == 'INT':
-		return integerSubject(chromosomeSize, bounds)
+		return __integer_subject(chromosomeSize, bounds)
 	if codification == 'INT-PERM':
-		return permutedIntegerSubject(chromosomeSize)
+		return __permuted_integer_subject(chromosomeSize)
 	if codification == 'REAL':
-		return realSubject(chromosomeSize, bounds)
+		return __real_subject(chromosomeSize, bounds)
 
-def binarySubject(size):
+def __binary_subject(size):
     subject = []
     for _ in range(size):
-            subject.append(randomNumber((0,1)))
+            subject.append(__random_number((0,1)))
     return subject
 
-def integerSubject(size, bounds):
+def __integer_subject(size, bounds):
 	subject = []
 	for _ in range(size):
-		subject.append(randomNumber(bounds))
+		subject.append(__random_number(bounds))
 	return subject
 
-def permutedIntegerSubject(size):
+def __permuted_integer_subject(size):
 	subject = []
 	for i in range(size):
 		subject.append(i)
 	random.shuffle(subject)
 	return subject
 
-def realSubject(size, bounds):
+def __real_subject(size, bounds):
 	subject = []
 	realBounds = (bounds[0]*100, bounds[1]*100)
 	for _ in range(size):
-		subject.append(randomNumber(realBounds)/100)
+		subject.append(__random_number(realBounds)/100)
 	return subject
 
-def randomNumber(bounds):
+# ! this function should be in a dedicated file
+def __random_number(bounds):
 	return random.randrange(bounds[0], bounds[1]+1)
