@@ -1,4 +1,4 @@
-import random
+import lottery
 
 def init(populationSize, chromosomeSize, codification, bounds):
 	population = []
@@ -12,32 +12,28 @@ def __init_subject(chromosomeSize, codification, bounds):
 def __binary_subject(size, bounds):
     subject = []
     for _ in range(size):
-            subject.append(__random_number((0,1)))
+            subject.append(lottery.range((0,1)))
     return subject
 
 def __integer_subject(size, bounds):
 	subject = []
 	for _ in range(size):
-		subject.append(__random_number(bounds))
+		subject.append(lottery.range(bounds))
 	return subject
 
 def __permuted_integer_subject(size, bounds):
 	subject = []
 	for i in range(size):
 		subject.append(i)
-	random.shuffle(subject)
+	lottery.shuffle(subject)
 	return subject
 
 def __float_subject(size, bounds):
 	subject = []
 	realBounds = (bounds[0]*100, bounds[1]*100)
 	for _ in range(size):
-		subject.append(__random_number(realBounds)/100)
+		subject.append(lottery.range(realBounds)/100)
 	return subject
-
-# ! this function should be in a dedicated file with all random gerenators
-def __random_number(bounds):
-	return random.randrange(bounds[0], bounds[1]+1)
 
 condifications = {
 	'BIN' : __binary_subject,
