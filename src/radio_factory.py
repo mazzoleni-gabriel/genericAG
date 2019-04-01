@@ -11,14 +11,12 @@ def fitness(bit_list):
 	values = break_bit_list(bit_list)
 	NS = ajust_scale((0,24), __bitlist_to_int(values[0]), CROMOSSOME_SIZE/2)
 	NL = ajust_scale((0,16), __bitlist_to_int(values[1]), CROMOSSOME_SIZE/2)
-	print(NS)
-	print(NL)
 	L = NS*30 + NL*40
-	H = 0
-	if NS > 24 or NL > 16:
-		H = (NS + 2*NL - 40)/(16) ##TODO ajustar essa porra
-	print(H)
-	return L - H
+	H = (NS + 2*NL - 40)/(16)
+	if H > 0:
+		print(str(H) + ":" + str(NS) + ":" + str(NL))
+		return L - H
+	return L
 
 
 
@@ -33,12 +31,12 @@ def break_bit_list(bit_list):
 		NS.append(bit_list[i])
 		NL.append(bit_list[i+length])
 	result = (NS,NL)
-	print(result)
 	return result
 
 def __bitlist_to_int(bitlist):
 	return int("".join(str(i) for i in bitlist), 2)
 
 pop = population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'BIN', BOUNDS)
-print(pop)
-print(fitness(pop[0]))
+# print(pop)
+# print(fitness(pop[0]))
+print(fit.evaluate(fitness, pop))
