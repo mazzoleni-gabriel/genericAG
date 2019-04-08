@@ -1,6 +1,7 @@
 import population
 import fitness as fit
 import crossover
+import stocastic_tournament as selection
 
 POPULATION_SIZE = 10
 CROMOSSOME_SIZE = 10
@@ -14,7 +15,6 @@ def fitness(bit_list):
 	L = NS*30 + NL*40
 	H = (NS + 2*NL - 40)/(16)
 	if H > 0:
-		print(str(H) + ":" + str(NS) + ":" + str(NL))
 		return L - H
 	return L
 
@@ -37,6 +37,9 @@ def __bitlist_to_int(bitlist):
 	return int("".join(str(i) for i in bitlist), 2)
 
 pop = population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'BIN', BOUNDS)
-# print(pop)
-# print(fitness(pop[0]))
-print(fit.evaluate(fitness, pop))
+evaluations = fit.evaluate(fitness, pop)
+#print(evaluations)
+#print(selection.select(evaluations))
+#selection.select(evaluations)
+print(pop)
+print(selection.select(2,1,evaluations))

@@ -2,6 +2,7 @@ import math
 import population
 import fitness as fit
 import crossover
+import uniform_rank as selection
 
 POPULATION_SIZE = 10
 CROMOSSOME_SIZE = 16
@@ -42,11 +43,11 @@ pop = population.init(POPULATION_SIZE, CROMOSSOME_SIZE, 'BIN', BOUNDS)
 print(fit.evaluate(fitness, pop))
 
 
-# for _ in range(5000):
-# 	evaluated = fit.evaluate(fitness, pop)
-# 	evaluated.sort(key=lambda tup: tup[1], reverse=True)
-# 	pop = crossover.single_point(pop, 50, (0,1))
-# print(evaluated[0][1] - 4)
+for _ in range(5000):
+	evaluated = fit.evaluate(fitness, pop)
+	pop = selection.select(evaluated)
+	pop = crossover.single_point(pop, 50, (0,1))
+print(evaluated[0][1] - 4)
 
 
 
