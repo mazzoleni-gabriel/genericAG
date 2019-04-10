@@ -2,16 +2,20 @@ import population
 import fitness as fit
 import crossover
 import stocastic_tournament as selection
+import mutation
 
 POPULATION_SIZE = 10
 CROMOSSOME_SIZE = 10
 CODIFICATION = 'BIN'
 BOUNDS = None
+MUTATION_PROB = 5
+CROSSOVER_PROB = 80
+MAX_GENERATIONS = 100
 
 def fitness(bit_list):
 	values = break_bit_list(bit_list)
 	NS = ajust_scale((0,24), __bitlist_to_int(values[0]), CROMOSSOME_SIZE/2)
-	NL = ajust_scale((0,16), __bitlist_to_int(values[1]), CROMOSSOME_SIZE/2)
+	NL = ajust_scale((0,16cd), __bitlist_to_int(values[1]), CROMOSSOME_SIZE/2)
 	L = NS*30 + NL*40
 	H = (NS + 2*NL - 40)/(16)
 	if H > 0:
@@ -41,5 +45,12 @@ evaluations = fit.evaluate(fitness, pop)
 #print(evaluations)
 #print(selection.select(evaluations))
 #selection.select(evaluations)
-print(pop)
-print(selection.select(2,1,evaluations))
+
+for _ in range(MAX_GENERATIONS):
+	evaluations = fit.evaluate(fitness, pop)
+	pop = selection.select(2,1,evaluations)
+	pop = crossover.single_point(pop, CROSSOVER_PROB)
+	pop = mutation.mutate(pop, MUTATION_PROB)
+evaluations.sort(key=lambda tup: tup[1])
+print(evaluations)
+
