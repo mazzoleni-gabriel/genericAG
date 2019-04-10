@@ -15,7 +15,7 @@ MAX_GENERATIONS = 100
 def fitness(bit_list):
 	values = break_bit_list(bit_list)
 	NS = ajust_scale((0,24), __bitlist_to_int(values[0]), CROMOSSOME_SIZE/2)
-	NL = ajust_scale((0,16cd), __bitlist_to_int(values[1]), CROMOSSOME_SIZE/2)
+	NL = ajust_scale((0,16), __bitlist_to_int(values[1]), CROMOSSOME_SIZE/2)
 	L = NS*30 + NL*40
 	H = (NS + 2*NL - 40)/(16)
 	if H > 0:
